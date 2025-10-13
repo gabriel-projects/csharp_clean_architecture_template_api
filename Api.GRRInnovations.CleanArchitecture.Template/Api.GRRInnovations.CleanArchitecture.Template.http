@@ -1,0 +1,6 @@
+@Api.GRRInnovations.CleanArchitecture.Template_HostAddress = http://localhost:5048
+
+GET {{Api.GRRInnovations.CleanArchitecture.Template_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

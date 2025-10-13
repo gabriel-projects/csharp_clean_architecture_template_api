@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c9e5e98a-86e9-44d2-bae9-ada8f854a9b3</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+	<PackageReference Include="Scalar.AspNetCore" Version="2.8.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.GRRInnovations.CleanArchitecture.Template.Application\Api.GRRInnovations.CleanArchitecture.Template.Application.csproj" />
+    <ProjectReference Include="..\Api.GRRInnovations.CleanArchitecture.Template.Infrastructure\Api.GRRInnovations.CleanArchitecture.Template.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
