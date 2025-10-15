@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.GRRInnovations.CleanArc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.GRRInnovations.CleanArchitecture.Template.Shared", "Api.GRRInnovations.CleanArchitecture.Template.Shared\Api.GRRInnovations.CleanArchitecture.Template.Shared.csproj", "{345F4097-EDE2-4F6E-813F-FE2B4C16CABE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.GRRInnovations.CleanArchitecture.Template.UnitTests", "tests\Api.GRRInnovations.CleanArchitecture.Template.UnitTests\Api.GRRInnovations.CleanArchitecture.Template.UnitTests.csproj", "{9E04A3DC-8774-49D1-95A0-6F4ACABC2E43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api.GRRInnovations.CleanArchitecture.Template.IntegrationTests", "tests\Api.GRRInnovations.CleanArchitecture.Template.IntegrationTests\Api.GRRInnovations.CleanArchitecture.Template.IntegrationTests.csproj", "{0DD8A056-4E4D-4F72-A8EE-5F7365CF6890}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{345F4097-EDE2-4F6E-813F-FE2B4C16CABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{345F4097-EDE2-4F6E-813F-FE2B4C16CABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{345F4097-EDE2-4F6E-813F-FE2B4C16CABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E04A3DC-8774-49D1-95A0-6F4ACABC2E43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E04A3DC-8774-49D1-95A0-6F4ACABC2E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E04A3DC-8774-49D1-95A0-6F4ACABC2E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E04A3DC-8774-49D1-95A0-6F4ACABC2E43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DD8A056-4E4D-4F72-A8EE-5F7365CF6890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DD8A056-4E4D-4F72-A8EE-5F7365CF6890}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DD8A056-4E4D-4F72-A8EE-5F7365CF6890}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DD8A056-4E4D-4F72-A8EE-5F7365CF6890}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
