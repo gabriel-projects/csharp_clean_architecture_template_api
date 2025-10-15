@@ -18,4 +18,21 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Api\Middleware\" />
+    <Folder Include="Infrastructure\Caching\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Common\" />
+    <Folder Include="Setup\DatabaseSeeder\" />
+    <Folder Include="Setup\TestStartup\" />
+    <Folder Include="Setup\CustomWebAppFactory\" />
+    <Folder Include="Setup\Containers\" />
+    <Folder Include="Setup\" />
+    <Folder Include="Infrastructure\Logging\" />
+    <Folder Include="Infrastructure\Persistence\" />
+    <Folder Include="Api\Controllers\" />
+    <Folder Include="Api\" />
+  </ItemGroup>
+
 </Project>
