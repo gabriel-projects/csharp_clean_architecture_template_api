@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>GRRInnovations.CleanArchitecture.Template</id>
-    <version>1.0.0</version>
+    <version>0.0.0</version>
     <authors>GRRInnovations</authors>
     <owners>GRRInnovations</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

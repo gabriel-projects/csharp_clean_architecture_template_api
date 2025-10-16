@@ -1,0 +1,32 @@
+name: 🚀 Publish NuGet Template
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    steps:
+      - name: 📦 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Download NuGet CLI
+        run: |
+          Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe
+
+      - name: 🧩 Extract version from tag
+        id: get_version
+        shell: pwsh
+        run: |
+          $version = $env:GITHUB_REF -replace 'refs/tags/v',''
+          echo "VERSION=$version" >> $env:GITHUB_ENV
+          echo "Detected version: $version"
+
+      - name: 🏗️ Pack template
+        run: ./nuget.exe pack GRRInnovations.CleanArchitecture.Template.nuspec -OutputDirectory ./nupkgs -Version $env:VERSION
+
+      - name: 🚀 Publish to NuGet.org
+        run: ./nuget.exe push ./nupkgs/*.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
