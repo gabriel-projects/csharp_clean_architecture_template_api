@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "GRRInnovations",
+  "classifications": [ "Clean Architecture", "WebAPI", "DDD", "Template" ],
+  "identity": "GRRInnovations.CleanArchitecture.Template",
+  "name": "GRRInnovations Clean Architecture Solution",
+  "shortName": "grr-cleanarch",
+  "sourceName": "Api.GRRInnovations.CleanArchitecture.Template",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "symbols": {
+    "skipRestore": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "false",
+      "description": "If specified, skips restoring NuGet packages after creation."
+    }
+  },
+  "postActions": [
+    {
+      "description": "Restore NuGet packages required by this solution.",
+      "manualInstructions": [
+        { "text": "Run 'dotnet restore'" }
+      ],
+      "actionId": "F2A7C6A5-06E2-47E2-9E28-2A5E64B0D2C6",
+      "continueOnError": true
+    }
+  ]
+}
