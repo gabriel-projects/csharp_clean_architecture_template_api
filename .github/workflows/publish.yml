@@ -40,10 +40,10 @@ jobs:
 
       - name: 🏷️ Create and push new tag
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.name "Gabriel Rossi"
+          git config user.email "gabriel.rossi@seuemail.com"
           git tag "v${{ env.VERSION }}"
-          git push origin "v${{ env.VERSION }}"
+          git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "v${{ env.VERSION }}"
 
       - name: 🏗️ Pack template
         run: ./nuget.exe pack GRRInnovations.CleanArchitecture.Template.nuspec -OutputDirectory ./nupkgs -Version $env:VERSION
