@@ -1,9 +1,9 @@
-name: 🚀 Publish NuGet Template
+name: 🚀 Auto Publish NuGet Template
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - main  # toda vez que fizer push na main
 
 jobs:
   publish:
@@ -12,18 +12,38 @@ jobs:
     steps:
       - name: 📦 Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # importante para conseguir ler tags anteriores
 
       - name: ⚙️ Download NuGet CLI
         run: |
           Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe
 
-      - name: 🧩 Extract version from tag
+      - name: 🔍 Detect last version tag
         id: get_version
         shell: pwsh
         run: |
-          $version = $env:GITHUB_REF -replace 'refs/tags/v',''
-          echo "VERSION=$version" >> $env:GITHUB_ENV
-          echo "Detected version: $version"
+          $tags = git tag --sort=-v:refname
+          if ($tags.Length -eq 0) {
+            $newVersion = "1.0.0"
+          } else {
+            $lastTag = $tags[0]
+            Write-Host "Last tag found: $lastTag"
+            $split = $lastTag -replace 'v','' -split '\.'
+            $major = [int]$split[0]
+            $minor = [int]$split[1]
+            $patch = [int]$split[2] + 1
+            $newVersion = "$major.$minor.$patch"
+          }
+          echo "VERSION=$newVersion" >> $env:GITHUB_ENV
+          echo "Next version: v$newVersion"
+
+      - name: 🏷️ Create and push new tag
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git tag "v${{ env.VERSION }}"
+          git push origin "v${{ env.VERSION }}"
 
       - name: 🏗️ Pack template
         run: ./nuget.exe pack GRRInnovations.CleanArchitecture.Template.nuspec -OutputDirectory ./nupkgs -Version $env:VERSION
