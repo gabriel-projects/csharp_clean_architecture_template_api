@@ -6,6 +6,7 @@ on:
       - main  # toda vez que fizer push na main
 permissions:
   packages: write
+  contents: write
 
 jobs:
   publish:
@@ -41,11 +42,14 @@ jobs:
           echo "Next version: v$newVersion"
 
       - name: 🏷️ Create and push new tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "Gabriel Rossi"
-          git config user.email "gabriel.rossi@seuemail.com"
+          git config user.email "gabriel.rossi@users.noreply.github.com"
           git tag "v${{ env.VERSION }}"
-          git push "https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" "v${{ env.VERSION }}"
+          git push https://${{ github.actor }}:${{ env.GITHUB_TOKEN }}@github.com/${{ github.repository }} "v${{ env.VERSION }}"
+
 
       - name: 🏗️ Pack template
         run: ./nuget.exe pack GRRInnovations.CleanArchitecture.Template.nuspec -OutputDirectory ./nupkgs -Version $env:VERSION
