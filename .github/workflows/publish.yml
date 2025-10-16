@@ -52,7 +52,19 @@ jobs:
 
 
       - name: 🏗️ Pack template
-        run: ./nuget.exe pack GRRInnovations.CleanArchitecture.Template.nuspec -OutputDirectory ./nupkgs -Version $env:VERSION
+        shell: pwsh
+        run: |
+          Write-Host "Creating output directory..."
+          New-Item -ItemType Directory -Force -Path "$PWD/nupkgs" | Out-Null
+          Write-Host "Packing template version $env:VERSION..."
+          ./nuget.exe pack "$PWD/GRRInnovations.CleanArchitecture.Template.nuspec" -OutputDirectory "$PWD/nupkgs" -Version $env:VERSION
+          Write-Host "Contents of nupkgs directory:"
+          Get-ChildItem "$PWD/nupkgs"
+
 
       - name: 🚀 Publish to NuGet.org
-        run: ./nuget.exe push ./nupkgs/*.nupkg -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
+        shell: pwsh
+        run: |
+          Write-Host "Pushing package to NuGet.org..."
+          ./nuget.exe push "$PWD/nupkgs/*.nupkg" -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
+
