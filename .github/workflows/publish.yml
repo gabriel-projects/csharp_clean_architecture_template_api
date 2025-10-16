@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # toda vez que fizer push na main
+permissions:
+  packages: write
 
 jobs:
   publish:
