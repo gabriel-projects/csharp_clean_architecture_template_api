@@ -62,4 +62,8 @@ jobs:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           echo "Pushing package to NuGet.org..."
-          dotnet nuget push ./nupkgs/*.*
+          dotnet nuget push ./nupkgs/*.nupkg \
+            --api-key $NUGET_API_KEY \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+          echo "🎉 Package v${{ env.VERSION }} published to NuGet.org!"
