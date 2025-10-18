@@ -9,7 +9,7 @@
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",
-    "type": "solution"
+    "type": "project"
   },
   "symbols": {
     "skipRestore": {
