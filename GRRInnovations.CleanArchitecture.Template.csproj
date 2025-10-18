@@ -8,6 +8,7 @@
     <NoBuild>true</NoBuild>
 
     <!-- Metadados do pacote -->
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>GRRInnovations.CleanArchitecture.Template</PackageId>
     <Version>0.0.1</Version>
     <Authors>GRRInnovations</Authors>
@@ -18,6 +19,10 @@
     <RepositoryUrl>https://github.com/gabriel-projects/csharp_clean_architecture_template_api</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
+
+<ItemGroup>
+  <None Include="README.md" Pack="true" PackagePath="" />
+</ItemGroup>
 
   <ItemGroup>
     <None Remove="GRRInnovations.CleanArchitecture.Template.csproj" />
