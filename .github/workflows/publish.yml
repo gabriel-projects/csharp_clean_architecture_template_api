@@ -66,4 +66,4 @@ jobs:
             --api-key $NUGET_API_KEY \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
-          echo "🎉 Package v${{ env.VERSION }} published to NuGet.org!"
+          echo "🎉 [Package v${{ env.VERSION }} published to NuGet.org!](https://www.nuget.org/packages/GRRInnovations.CleanArchitecture.Template)"
