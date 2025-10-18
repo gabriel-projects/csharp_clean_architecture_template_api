@@ -9,7 +9,7 @@
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",
-    "type": "solution"
+    "type": "project"
   },
   "symbols": {
     "skipRestore": {
@@ -19,13 +19,16 @@
       "description": "If specified, skips restoring NuGet packages after creation."
     }
   },
+  "primaryOutputs": [
+    { "path": "Api.GRRInnovations.CleanArchitecture.Template.sln" }
+  ],
   "postActions": [
     {
       "description": "Restore NuGet packages required by this solution.",
       "manualInstructions": [
         { "text": "Run 'dotnet restore'" }
       ],
-      "actionId": "F2A7C6A5-06E2-47E2-9E28-2A5E64B0D2C6",
+      "actionId": "9E2E9050-CDF6-4F1F-8F0A-3E68D64F6F8F",
       "continueOnError": true
     }
   ]

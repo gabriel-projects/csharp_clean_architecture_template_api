@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Configuração geral -->
+    <TargetFramework>net9.0</TargetFramework>
+    <IsPackable>true</IsPackable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <NoBuild>true</NoBuild>
+
+    <!-- Metadados do pacote -->
+    <PackageId>GRRInnovations.CleanArchitecture.Template</PackageId>
+    <Version>0.0.1</Version>
+    <Authors>GRRInnovations</Authors>
+    <Company>GRRInnovations</Company>
+    <Description>Clean Architecture Template for ASP.NET Core (DDD, CQRS, Application, Infrastructure, Domain, Shared)</Description>
+    <PackageType>Template</PackageType>
+    <PackageProjectUrl>https://github.com/gabriel-projects/csharp_clean_architecture_template_api</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/gabriel-projects/csharp_clean_architecture_template_api</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="GRRInnovations.CleanArchitecture.Template.csproj" />
+  </ItemGroup>
+
+  <!-- Inclui todos os arquivos relevantes do template -->
+  <ItemGroup>
+  <None Include="**/*"
+        Exclude="
+            bin/**;
+            obj/**;
+            nupkgs/**;
+            .vs/**;
+            .git/**;
+            .github/**;
+            *.user;
+            *.suo;
+            *.nupkg;
+            *.zip;
+            *.log;
+            GRRInnovations.CleanArchitecture.Template.csproj"
+        Pack="true"
+        PackagePath="content/" />
+</ItemGroup>
+
+
+</Project>
