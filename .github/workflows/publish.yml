@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:  # permite rodar manualmente também
+  workflow_dispatch:  # também permite rodar manualmente no GitHub
 
 permissions:
   contents: write
@@ -38,4 +38,28 @@ jobs:
           echo "Next version: v$new_version"
           echo "VERSION=$new_version" >> $GITHUB_ENV
 
-      - name: 🏗️ Build
+      - name: 🏗️ Build and pack NuGet template
+        run: |
+          dotnet pack ./GRRInnovations.CleanArchitecture.Template.csproj \
+            --configuration Release \
+            --output ./nupkgs \
+            /p:Version=${{ env.VERSION }}
+          echo "✅ Template version ${{ env.VERSION }} packed successfully."
+          ls ./nupkgs
+
+      - name: 🏷️ Create and push new Git tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag "v${{ env.VERSION }}"
+          git push origin "v${{ env.VERSION }}"
+          echo "✅ Tag v${{ env.VERSION }} pushed to repository."
+
+      - name: 🚀 Publish to NuGet.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          echo "Pushing package to NuGet.org..."
+          dotnet nuget push ./nupkgs/*.*
