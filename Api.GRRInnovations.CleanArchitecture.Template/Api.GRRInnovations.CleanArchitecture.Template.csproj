@@ -1,34 +1,29 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
-		<!-- Não precisa compilar, apenas empacotar -->
-		<IsPackable>true</IsPackable>
-		<IncludeBuildOutput>false</IncludeBuildOutput>
-		<NoBuild>true</NoBuild>
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>c9e5e98a-86e9-44d2-bae9-ada8f854a9b3</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
 
-		<!-- Informações do pacote -->
-		<PackageId>GRRInnovations.CleanArchitecture.Template</PackageId>
-		<Version>0.0.7</Version>
-		<Authors>Gabriel Rossi</Authors>
-		<Company>GRRInnovations</Company>
-		<Description>Clean Architecture Template for ASP.NET Core APIs with DDD and Best Practices.</Description>
-		<RepositoryUrl>https://github.com/gabriel-projects/csharp_clean_architecture_template_api</RepositoryUrl>
-		<PackageTags>CleanArchitecture;ASP.NET;Template;DDD;WebAPI</PackageTags>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+	<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+	<PackageReference Include="Scalar.AspNetCore" Version="2.8.11" />
+  </ItemGroup>
 
-		<!-- Onde salvar o .nupkg -->
-		<PackageOutputPath>..\..\nupkgs</PackageOutputPath>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
 
-	<!-- Inclui todos os arquivos do template -->
-	<ItemGroup>
-		<Content Include="**\*" Exclude="bin\**;obj\**;nupkgs\**">
-			<!-- Envia tudo para a pasta content/ do .nupkg -->
-			<PackagePath>content/</PackagePath>
-			<BuildAction>None</BuildAction>
-			<CopyToOutput>false</CopyToOutput>
-		</Content>
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Api.GRRInnovations.CleanArchitecture.Template.Application\Api.GRRInnovations.CleanArchitecture.Template.Application.csproj" />
+    <ProjectReference Include="..\Api.GRRInnovations.CleanArchitecture.Template.Infrastructure\Api.GRRInnovations.CleanArchitecture.Template.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>
