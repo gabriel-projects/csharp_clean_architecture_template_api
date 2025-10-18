@@ -6,6 +6,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>c9e5e98a-86e9-44d2-bae9-ada8f854a9b3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<PackageId>GRRInnovations.CleanArchitecture.Template</PackageId>
+	<Version>0.0.1</Version>
+	<Authors>Gabriel Rossi</Authors>
+	<PackageOutputPath>..\..\nupkgs</PackageOutputPath>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
