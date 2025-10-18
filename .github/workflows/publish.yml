@@ -1,70 +1,41 @@
-name: 🚀 Auto Publish NuGet Template
+name: 🚀 Auto Publish Clean Architecture Template
 
 on:
   push:
     branches:
-      - main  # toda vez que fizer push na main
+      - main
+  workflow_dispatch:  # permite rodar manualmente também
+
 permissions:
-  packages: write
   contents: write
+  packages: write
 
 jobs:
   publish:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: 📦 Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # importante para conseguir ler tags anteriores
+          fetch-depth: 0  # necessário para ler tags anteriores
 
-      - name: ⚙️ Download NuGet CLI
+      - name: 🧩 Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: 🏷️ Detect next semantic version
+        id: versioning
         run: |
-          Invoke-WebRequest -Uri https://dist.nuget.org/win-x86-commandline/latest/nuget.exe -OutFile nuget.exe
+          echo "🔍 Checking last Git tag..."
+          last_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v1.0.0")
+          echo "Last tag: $last_tag"
+          version=${last_tag#v}
+          IFS='.' read -r major minor patch <<< "$version"
+          patch=$((patch + 1))
+          new_version="$major.$minor.$patch"
+          echo "Next version: v$new_version"
+          echo "VERSION=$new_version" >> $GITHUB_ENV
 
-      - name: 🔍 Detect last version tag
-        id: get_version
-        shell: pwsh
-        run: |
-          $tags = git tag --sort=-v:refname
-          if ($tags.Length -eq 0) {
-            $newVersion = "1.0.0"
-          } else {
-            $lastTag = $tags[0]
-            Write-Host "Last tag found: $lastTag"
-            $split = $lastTag -replace 'v','' -split '\.'
-            $major = [int]$split[0]
-            $minor = [int]$split[1]
-            $patch = [int]$split[2] + 1
-            $newVersion = "$major.$minor.$patch"
-          }
-          echo "VERSION=$newVersion" >> $env:GITHUB_ENV
-          echo "Next version: v$newVersion"
-
-      - name: 🏷️ Create and push new tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name "Gabriel Rossi"
-          git config user.email "gabriel.rossi@users.noreply.github.com"
-          git tag "v${{ env.VERSION }}"
-          git push https://${{ github.actor }}:${{ env.GITHUB_TOKEN }}@github.com/${{ github.repository }} "v${{ env.VERSION }}"
-
-
-      - name: 🏗️ Pack template
-        shell: pwsh
-        run: |
-          Write-Host "Creating output directory..."
-          New-Item -ItemType Directory -Force -Path "$PWD/nupkgs" | Out-Null
-          Write-Host "Packing template version $env:VERSION..."
-          ./nuget.exe pack "$PWD/GRRInnovations.CleanArchitecture.Template.nuspec" -OutputDirectory "$PWD/nupkgs" -Version $env:VERSION
-          Write-Host "Contents of nupkgs directory:"
-          Get-ChildItem "$PWD/nupkgs"
-
-
-      - name: 🚀 Publish to NuGet.org
-        shell: pwsh
-        run: |
-          Write-Host "Pushing package to NuGet.org..."
-          ./nuget.exe push "$PWD/nupkgs/*.nupkg" -ApiKey ${{ secrets.NUGET_API_KEY }} -Source https://api.nuget.org/v3/index.json
-
+      - name: 🏗️ Build
