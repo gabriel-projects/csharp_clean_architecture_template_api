@@ -46,6 +46,7 @@ Install the template globally:
 
 ```bash
 dotnet new install GRRInnovations.CleanArchitecture.Template
+```
 
 ```bash
 dotnet new grr-cleanarch -n MyCleanApi
